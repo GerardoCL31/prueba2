@@ -1,11 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Atrapa el Círculo</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        #gameArea {
+            position: relative;
+            width: 500px;
+            height: 500px;
+            border: 2px solid #000;
+            background-color: #fff;
+        }
+        #circle {
+            position: absolute; 
+            width: 51px;
+            height: 52px;
+            border-radius: 49%;
+            background-color: #3498db;
+        }
+        #score {
+            margin-top: 20px;
+            font-size: 21px;
+
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-    
+    <div id="gameArea">
+        <div id="circle"></div>
+    </div>
+    <div id="score">Puntuación: 0</div>
+
+    <script>
+        let score = 0;
+        const circle = document.getElementById('circle');
+        const scoreDisplay = document.getElementById('score');
+        const gameArea = document.getElementById('gameArea');
+
+        function moveCircle() {
+            const gameWidth = gameArea.offsetWidth;
+            const gameHeight = gameArea.offsetHeight;
+            const circleSize = circle.offsetWidth;
+
+            const randomX = Math.floor(Math.random() * (gameWidth - circleSize));
+            const randomY = Math.floor(Math.random() * (gameHeight - circleSize));
+
+            circle.style.left = randomX + 'px';
+            circle.style.top = randomY + 'px';
+        }
+
+        circle.addEventListener('click', function() {
+            score++;
+            scoreDisplay.textContent = 'Puntuación: ' + score;
+            moveCircle();
+        });
+
+        // Posición inicial del círculo
+        moveCircle();
+    </script>
 </body>
 </html>
